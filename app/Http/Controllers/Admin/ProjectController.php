@@ -14,6 +14,9 @@ class ProjectController extends Controller
     public function index()
     {
         //
+        $projects = Project::all();
+
+        return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -22,6 +25,7 @@ class ProjectController extends Controller
     public function create()
     {
         //
+        return view('admin.create');
     }
 
     /**
@@ -30,6 +34,11 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         //
+        $form_data= $request->all();
+
+        $new_preoject= Project::create($form_data);
+
+        return to_route('admin.projects.show', $new_preoject);
     }
 
     /**
@@ -38,6 +47,7 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         //
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
